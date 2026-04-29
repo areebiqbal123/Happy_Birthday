@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Dilkash</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -13,13 +13,19 @@
             --error-red: #e63946;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            width: 100%;
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Password Overlay */
@@ -34,49 +40,54 @@
             justify-content: center;
             z-index: 100;
             transition: opacity 0.8s ease;
+            padding: 20px;
         }
 
         .auth-card {
             background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
+            padding: 30px;
             border-radius: 15px;
             text-align: center;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 320px;
         }
 
         .auth-card h2 {
             color: var(--accent-cyan);
             font-family: 'Dancing Script', cursive;
             margin-bottom: 20px;
+            font-size: 1.8rem;
         }
 
         .auth-card input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin-bottom: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             border: none;
             outline: none;
-            box-sizing: border-box;
             background: rgba(255, 255, 255, 0.9);
+            font-size: 16px; /* Prevents iOS zoom on focus */
         }
 
         .auth-btn {
             background: var(--accent-cyan);
             color: #1d3557;
             border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
             width: 100%;
+            font-size: 1rem;
         }
 
         #error-msg {
             color: var(--error-red);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-top: 10px;
             display: none;
         }
@@ -86,6 +97,7 @@
             display: none;
             opacity: 0;
             transition: opacity 1s ease;
+            width: 100%;
         }
 
         #home-page {
@@ -93,13 +105,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
+            padding: 20px;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 10vw, 4rem);
             color: var(--accent-cyan);
             margin-bottom: 10px;
         }
@@ -109,58 +122,62 @@
             font-style: italic;
             margin-top: 20px;
             opacity: 0.8;
-            max-width: 80%;
+            max-width: 90%;
+            line-height: 1.5;
         }
 
-        /* Skip Button Style */
         .skip-btn {
-            margin-top: 30px;
+            margin-top: 40px;
             background: transparent;
             color: var(--accent-cyan);
             border: 1px solid var(--accent-cyan);
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
             transition: 0.3s;
-            opacity: 0.6;
-        }
-
-        .skip-btn:hover {
-            opacity: 1;
-            background: rgba(190, 227, 219, 0.1);
+            opacity: 0.7;
         }
 
         /* Letter Styles */
         #letter-page {
             display: none;
             justify-content: center;
-            padding: 60px 20px;
+            padding: 40px 15px;
+            width: 100%;
         }
 
         .letter-paper {
             width: 100%;
             max-width: 750px;
             background: #f2e3c9 url('https://www.transparenttextures.com/patterns/aged-paper.png');
-            box-shadow: 0 0 40px rgba(0,0,0,0.7);
-            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 40px 25px;
+            border-radius: 4px;
             border: 1px solid #d4c3a3;
             color: var(--deep-black);
             position: relative;
         }
 
+        .letter-header {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
         .letter-content {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            text-align: justify;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            text-align: left; /* Better for mobile readability than justify */
         }
 
         .signature {
-            margin-top: 50px;
+            margin-top: 40px;
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: 2rem;
             text-align: right;
         }
 
@@ -168,15 +185,26 @@
             background: #1d3557;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 28px;
             border-radius: 30px;
             cursor: pointer;
             margin-top: 20px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 250px;
         }
 
+        /* Mobile specific adjustments */
         @media (max-width: 600px) {
-            .letter-paper { padding: 30px; }
-            h1 { font-size: 2.8rem; }
+            .letter-paper {
+                padding: 30px 20px;
+            }
+            .letter-content {
+                font-size: 1.1rem;
+            }
+            .signature {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -185,7 +213,7 @@
     <div id="password-overlay">
         <div class="auth-card">
             <h2>Private Access</h2>
-            <input type="password" id="pass-input" placeholder="Enter Password">
+            <input type="password" id="pass-input" placeholder="Enter Password" inputmode="text">
             <button class="auth-btn" onclick="checkPassword()">Unlock & Play</button>
             <p id="error-msg">Incorrect Password. Try again!</p>
         </div>
@@ -200,13 +228,13 @@
 
         <div id="letter-page">
             <div class="letter-paper">
-                <div style="border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 20px; padding-bottom: 10px;">
+                <div class="letter-header">
                     <p><strong>To:</strong> Dilkash</p>
                     <p><strong>Subject:</strong> Happy Birthday to love of my life</p>
                 </div>
 
                 <div class="letter-content">
-                    <h2 style="font-family: 'Dancing Script';">Happy Birthday ❤️</h2>
+                    <h2 style="font-family: 'Dancing Script'; margin-top: 0;">Happy Birthday ❤️</h2>
                     I know every year I end up just sending you a message, and maybe it feels small… but what I feel for you has never been small. If anything, it’s something I carry with me every single day, quietly, constantly.
                     <br><br>
                     You’re not just someone I like… you’re someone I belong to in a way I can’t fully explain. The way you exist in my mind, in my thoughts, in the little things that remind me of you—it’s real, and it’s deep.
@@ -226,7 +254,7 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 40px; border-top: 1px dashed #ccc; padding-top: 20px;">
-                    <p style="font-size: 0.8rem; color: #555;">Final message from my heart...</p>
+                    <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">Final message from my heart...</p>
                     <button class="music-btn" id="play-btn-2" onclick="toggleMusic2()">▶ Play Final Song</button>
                     <audio id="song-2" loop>
                         <source src="audio.mp3" type="audio/mpeg">
@@ -257,7 +285,8 @@
                     
                     setTimeout(() => {
                         document.getElementById('main-content').style.opacity = '1';
-                        audio1.play();
+                        // Mobile requires user interaction to play, which the click provides
+                        audio1.play().catch(e => console.log("Audio play prevented: ", e));
                     }, 50);
                 }, 800);
             } else {
@@ -273,7 +302,7 @@
         // Skip Functionality
         function skipToLetter() {
             audio1.pause();
-            audio1.currentTime = 0; // Reset time
+            audio1.currentTime = 0;
             showLetter();
         }
 
@@ -289,7 +318,7 @@
         function toggleMusic2() {
             const btn = document.getElementById('play-btn-2');
             if (audio2.paused) {
-                audio2.play();
+                audio2.play().catch(e => console.log("Audio play prevented: ", e));
                 btn.innerHTML = "⏸ Pause Final Song";
             } else {
                 audio2.pause();
@@ -298,7 +327,10 @@
         }
 
         document.getElementById('pass-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkPassword();
+            if (e.key === 'Enter') {
+                checkPassword();
+                document.getElementById('pass-input').blur(); // Hides mobile keyboard
+            }
         });
     </script>
 </body>
